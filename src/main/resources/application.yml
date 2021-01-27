@@ -1,12 +1,24 @@
 spring:
-  application:
-    name: order-service
-eureka:
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: https://digitalreality-inventory-service.azuremicroservices.io/
-    inventory:
-      ribbon:
-        listOfServers: https://digitalreality-inventory-service.azuremicroservices.io/
+ application:
+   name: order-service
+
+ server:
+   port: 8091
+ eureka:
+   instance:
+     hostname: http://localhost:8090/eureka/
+   client:
+     register-with-eureka: false #default true
+     fetch-registry: true #default true
+     serviceUrl:
+       defaultZone: http://localhost:8090/eureka
+ endpoints:
+   restart:
+     enabled: true
+
+ inventory-service:
+   ribbon:
+     listOfServers: localhost:8090
+ ribbon:
+   eureka:
+     enabled: true
